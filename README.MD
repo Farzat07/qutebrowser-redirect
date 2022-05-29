@@ -1,27 +1,38 @@
 # redirect.py
 
-## Used for redirecting website X to website Y in qutebrowser.
+## Used for redirecting website(s) X to one of website(s) Y in qutebrowser
 
-> I have literally no experiance in coding, what so ever.
+Let us say, for example, that you want to redirect to a random invidious
+instance each time you visit youtube.
 
-As an example, it redirects the following:
+First you create a list of possible youtube domains, for example `youtu.be`,
+`youtube.com`, and `www.youtube.com`.
 
-	1. reddit.com -> teddit.net
-	2. twitter.com -> nitter.eu
-	3. instagram.com -> bibliogram.snopyta.org
+Then you create a list of invidious instances you want to use, for example
+`invidious.namazso.eu`, `yt.artemislena.eu`, `invidious.flokinet.to`, and
+`invidious.weblibre.org`.
 
-To use the script, put it in `~/.config/qutebrowser/` and add `config.source('redirect.py')` in your `config.py` .
+Then you create a list item like the following, and add it to the list
+ALL_HOSTS:
 
-You can also add more websites by just adding one more if statement below the other ones like so:
-
+```python
+[
+    {
+        "www.youtube.com",
+        "youtube.com",
+        "youtu.be",
+    },
+    [
+        "invidious.namazso.eu",
+        "yt.artemislena.eu",
+        "invidious.flokinet.to",
+        "invidious.weblibre.org",
+    ],
+]
 ```
-if request.request_url.host () == 'www.websiteyouwanttoredirect.org':
-    request.request_url.setHost ('www.websiteyouwanttouseinstead.net')
-	
-    try:
-	request.redirect (request.request_url)
-    except:
-	pass
-```
 
-I guess it works. ¯\_ (ツ)_/¯
+The script already has redirects from youtube, reddit, and twitter to invidious,
+libreddit, and nitter respectively.
+
+To use the script, put it in `~/.config/qutebrowser/` and add
+`config.source('redirect.py')` in your `config.py` .
